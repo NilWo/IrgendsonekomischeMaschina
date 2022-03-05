@@ -3,6 +3,6 @@ public class main {
 
     public static void main(String[] args) {
         GUI1 = new guiMASCHINA();
-        GUI1.gui();
+        GUI1.gui(15);
     }
 }

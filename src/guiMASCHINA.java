@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.TimeUnit;
 
 public class guiMASCHINA implements ActionListener {
     JFrame frame;
@@ -11,12 +10,9 @@ public class guiMASCHINA implements ActionListener {
     JButton button;
     int zeit;
 
-
-    public void gui () {
+    public void gui (int zeit) {
         frame = new JFrame();
         panel = new JPanel();
-
-        zeit = 10;
 
         // Countdown
         countdown = new JLabel(String.valueOf(zeit) + " Sekunden");
@@ -40,12 +36,12 @@ public class guiMASCHINA implements ActionListener {
         button.setBackground(Color.white);
         button.setFocusPainted(false);
 
-
-
+        // Panel
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panel.setLayout(new GridLayout(3, 1, 10, 10));
         panel.setBackground(Color.darkGray);
 
+        // Frame
         frame.add(panel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("guiMASCHINA");
@@ -54,39 +50,36 @@ public class guiMASCHINA implements ActionListener {
         frame.pack();
         frame.setVisible(true);
 
-
+        // Adding to panel
         panel.add(countdown);
         panel.add(bombe);
         panel.add(button);
-
 
         // Timer
         for(;;) {
             countdown.setText(String.valueOf(zeit) + " Sekunden");
             zeit--;
-
             try {
-                           Thread.sleep(1000);
+                if (zeit<0) {
+                    countdown.setText("Joke's over, you're dead!");
+                    bombe.setText("Kabumm :)");
+                    break;
+                }
+                else if (button.getModel().isArmed()) {
+                    countdown.setText("Gefahr ausgewichen :p");
+                    break;
+                }
+                else {
+                    Thread.sleep(1000);
+                }
             }
             catch(InterruptedException ex) {
                 Thread.currentThread().interrupt();
-            }
-
-            if (zeit<0) {
-                countdown.setText("Joke's over, you're dead!");
-                bombe.setText("Kabumm :)");
-                break;
-            }
-            else if (button.getModel().isArmed()) {
-                // button.addActionListener(e -> countdown.setText("Gefahr ausgewichen"));
-                countdown.setText("Gefahr ausgewichen :p");
-                break;
             }
            }
         }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Object source = e.getSource();
         }
     }
