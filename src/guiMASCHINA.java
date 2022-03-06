@@ -6,16 +6,16 @@ import java.awt.event.ActionListener;
 public class guiMASCHINA implements ActionListener {
     JFrame frame;
     JPanel panel;
-    JLabel bombe, countdown;
+    JLabel countdown, bombe;
     JButton button;
-    int zeit;
 
     public void gui (int zeit) {
         frame = new JFrame();
         panel = new JPanel();
+        Image icon = Toolkit.getDefaultToolkit().getImage("icon.jpg");
 
         // Countdown
-        countdown = new JLabel(String.valueOf(zeit) + " Sekunden");
+        countdown = new JLabel(zeit + " Sekunden");
         countdown.setFont(new Font("Arial", Font.BOLD, 24));
         countdown.setHorizontalAlignment(SwingConstants.CENTER);
         countdown.setVerticalAlignment(SwingConstants.CENTER);
@@ -44,9 +44,10 @@ public class guiMASCHINA implements ActionListener {
         // Frame
         frame.add(panel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("guiMASCHINA");
+        frame.setTitle("Bomb Defusal");
         frame.setMinimumSize(new Dimension(500, 500));
         frame.setResizable(false);
+        frame.setIconImage(icon);
         frame.pack();
         frame.setVisible(true);
 
@@ -82,4 +83,4 @@ public class guiMASCHINA implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         }
-    }
+}
