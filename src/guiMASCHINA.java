@@ -58,7 +58,7 @@ public class guiMASCHINA implements ActionListener {
 
         // Timer
         for(;;) {
-            countdown.setText(String.valueOf(zeit) + " Sekunden");
+            countdown.setText(zeit + " Sekunden");
             zeit--;
             try {
                 if (zeit<0) {
