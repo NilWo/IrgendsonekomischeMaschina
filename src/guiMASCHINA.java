@@ -4,10 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class guiMASCHINA implements ActionListener {
-    JFrame frame;
-    JPanel panel;
-    JLabel countdown, bombe;
-    JButton button;
+    private JFrame frame;
+    private JPanel panel;
+    private JLabel countdown, bombe;
+    private JButton button;
+    private boolean looprun;
 
     public void gui (int zeit) {
         frame = new JFrame();
@@ -57,18 +58,19 @@ public class guiMASCHINA implements ActionListener {
         panel.add(button);
 
         // Timer
-        for(;;) {
+        looprun=true;
+        while(looprun) {
             countdown.setText(zeit + " Sekunden");
             zeit--;
             try {
                 if (zeit<0) {
                     countdown.setText("Joke's over, you're dead!");
                     bombe.setText("Kabumm :)");
-                    break;
+                    looprun=false;
                 }
                 else if (button.getModel().isArmed()) {
                     countdown.setText("Gefahr ausgewichen :p");
-                    break;
+                    looprun=false;
                 }
                 else {
                     Thread.sleep(1000);
@@ -77,10 +79,10 @@ public class guiMASCHINA implements ActionListener {
             catch(InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
-           }
         }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        }
+    }
 }
